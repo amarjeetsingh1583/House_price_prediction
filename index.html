@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>House Price Predictor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <div class="card">
+    <h2>House Price Predictor</h2>
+    <form action="/predict" method="post">
+      <div class="form-grid">
+        <div class="field">
+          <label>Lot Area (sq ft)</label>
+          <input type="number" name="LotArea" value="8450" required>
+        </div>
+        <div class="field">
+          <label>Total Basement SF</label>
+          <input type="number" name="TotalBsmtSF" value="856" required>
+        </div>
+        <div class="field">
+          <label>Year Built</label>
+          <input type="number" name="YearBuilt" value="2003" required>
+        </div>
+        <div class="field">
+          <label>Year Remodeled</label>
+          <input type="number" name="YearRemodAdd" value="2003" required>
+        </div>
+        <div class="field">
+          <label>MS SubClass</label>
+          <input type="number" name="MSSubClass" value="60" required>
+        </div>
+        <div class="field">
+          <label>Overall Condition (1-9)</label>
+          <input type="number" name="OverallCond" value="5" min="1" max="9" required>
+        </div>
+        <div class="field">
+          <label>Finished Basement SF 2</label>
+          <input type="number" name="BsmtFinSF2" value="0" required>
+        </div>
+        <div class="field">
+          <label>MS Zoning</label>
+          <select name="MSZoning">
+            <option value="RL">RL (Residential Low)</option>
+            <option value="RM">RM (Residential Medium)</option>
+            <option value="FV">FV (Floating Village)</option>
+            <option value="RH">RH (Residential High)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Lot Configuration</label>
+          <select name="LotConfig">
+            <option value="Inside">Inside</option>
+            <option value="Corner">Corner</option>
+            <option value="CulDSac">Cul-de-sac</option>
+            <option value="FR2">FR2</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Building Type</label>
+          <select name="BldgType">
+            <option value="1Fam">Single Family</option>
+            <option value="2fmCon">Two-Family Conversion</option>
+            <option value="Duplex">Duplex</option>
+            <option value="TwnhsE">Townhouse End Unit</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Exterior Covering</label>
+          <select name="Exterior1st">
+            <option value="VinylSd">Vinyl Siding</option>
+            <option value="MetalSd">Metal Siding</option>
+            <option value="Wd Sdng">Wood Siding</option>
+            <option value="HdBoard">Hard Board</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn">Calculate Estimated Price</button>
+    </form>
+
+    {% if prediction_text %}
+    <div class="result">{{ prediction_text }}</div>
+    {% endif %}
+  </div>
+</body>
+
+</html>
